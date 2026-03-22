@@ -1,0 +1,375 @@
+/* =========================================
+   HERO
+   ========================================= */
+.hero {
+  background: var(--color-navy);
+  padding-block: var(--space-24) var(--space-20);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.012) 40px,
+      rgba(255,255,255,0.012) 41px
+    );
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-5);
+}
+
+.hero__eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  border-radius: var(--radius-full);
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+}
+
+.hero__title em {
+  color: var(--color-gold);
+  font-style: normal;
+}
+
+.hero__subtitle {
+  font-size: var(--text-xl);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: var(--space-10);
+}
+
+.hero__ctas {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-16);
+}
+
+.hero__trust {
+  display: flex;
+  gap: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.6);
+}
+
+.trust-item__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* =========================================
+   CATEGORY STRIP
+   ========================================= */
+.categories-section {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-5);
+}
+
+.categories-scroll {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2px;
+}
+
+.categories-scroll::-webkit-scrollbar { display: none; }
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem var(--space-4);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.category-pill:hover {
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+  background: var(--color-surface-alt);
+}
+
+.category-pill--active {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.category-pill__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: rgba(0,0,0,0.08);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+}
+
+.category-pill--active .category-pill__count {
+  background: rgba(255,255,255,0.15);
+}
+
+/* =========================================
+   FEATURED LISTINGS
+   ========================================= */
+.featured-section {
+  background: var(--color-white);
+}
+
+.listings-grid--featured {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* =========================================
+   HOW IT WORKS
+   ========================================= */
+.how-section {
+  background: var(--color-navy);
+}
+
+.how-section .section-title { color: var(--color-white); }
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.how-step__number {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: rgba(201,168,76,0.15);
+  border: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-gold);
+}
+
+.how-step__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+}
+
+.how-step__text {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+
+/* =========================================
+   TESTIMONIALS
+   ========================================= */
+.testimonials-section {
+  background: var(--color-surface);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.testimonial-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.testimonial-card__quote {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.testimonial-card__quote::before {
+  content: '"';
+  font-size: var(--text-4xl);
+  color: var(--color-gold);
+  line-height: 0;
+  vertical-align: -0.5em;
+  margin-right: var(--space-1);
+  font-style: normal;
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.testimonial-card__name {
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.testimonial-card__role {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* =========================================
+   SELL CTA BANNER
+   ========================================= */
+.sell-cta-section {
+  background: var(--color-gold);
+  padding-block: var(--space-16);
+}
+
+.sell-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.sell-cta__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-navy);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+.sell-cta__text {
+  font-size: var(--text-lg);
+  color: rgba(10,22,40,0.7);
+  max-width: 480px;
+}
+
+.sell-cta__stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.sell-cta__stat {
+  background: rgba(10,22,40,0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+}
+
+.sell-cta__stat-value {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  color: var(--color-navy);
+}
+
+.sell-cta__stat-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: rgba(10,22,40,0.6);
+  margin-top: var(--space-1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .listings-grid--featured { grid-template-columns: repeat(2, 1fr); }
+  .how-steps { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding-block: var(--space-16) var(--space-12); }
+  .hero__title { font-size: var(--text-4xl); }
+  .hero__ctas { flex-direction: column; }
+  .hero__trust { gap: var(--space-4); }
+  .listings-grid--featured { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .sell-cta-inner { grid-template-columns: 1fr; }
+  .sell-cta__stats { flex-direction: row; }
+}

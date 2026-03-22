@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listings durchsuchen — ReadyToPublish</title>
+  <meta name="description" content="Durchsuche hunderte druckfertige Buchprojekte nach Genre, Wortanzahl, Pakettyp und Preis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/browse.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">ReadyTo<span>Publish</span></a>
+      <div class="nav__links">
+        <a href="browse.html" class="nav__link">Durchsuchen</a>
+        <a href="sell.html" class="nav__link">Buch verkaufen</a>
+        <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
+      </div>
+      <div class="nav__actions">
+        <a href="#" class="btn btn--outline btn--sm">Anmelden</a>
+        <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+      </div>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile">
+    <a href="browse.html" class="nav__link">Durchsuchen</a>
+    <a href="sell.html" class="nav__link">Buch verkaufen</a>
+    <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
+    <a href="#" class="btn btn--outline btn--sm" style="margin-top:8px">Anmelden</a>
+    <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+  </div>
+</nav>
+
+<!-- Browse header -->
+<div class="browse-header">
+  <div class="container">
+    <h1 class="browse-header__title">Buchprojekte durchsuchen</h1>
+    <form class="search-bar" id="searchForm">
+      <div class="search-bar__input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="search" class="search-bar__input" id="searchInput"
+               placeholder="Titel, Autor oder Schlagwort suchen…">
+      </div>
+      <button type="submit" class="btn btn--primary">Suchen</button>
+    </form>
+  </div>
+</div>
+
+<!-- Browse body -->
+<div class="browse-body">
+  <div class="container">
+    <div class="browse-layout">
+
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-sidebar__title">
+          Filter
+          <span class="filter-sidebar__clear" id="clearFilters">Alle zurücksetzen</span>
+        </div>
+
+        <!-- Mobile close -->
+        <button id="closeSidebar" class="btn btn--ghost btn--sm" style="display:none; margin-bottom: var(--space-4)">
+          ✕ Schließen
+        </button>
+
+        <div class="filter-group">
+          <div class="filter-group__heading">Genre</div>
+          <div class="checkbox-group" id="genreFilter">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__heading">Wortanzahl</div>
+          <div class="checkbox-group" id="wordRangeFilter">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__heading">Pakettyp</div>
+          <div class="checkbox-group" id="packageFilter">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__heading">Preis (€)</div>
+          <div class="price-range-inputs">
+            <input type="number" class="price-range-input" id="priceMin"
+                   placeholder="Min" min="0" step="100">
+            <input type="number" class="price-range-input" id="priceMax"
+                   placeholder="Max" min="0" step="100">
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main>
+        <!-- Mobile filter toggle -->
+        <button class="filter-toggle-btn" id="filterToggleBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/>
+            <line x1="12" y1="18" x2="20" y2="18"/>
+          </svg>
+          Filter anzeigen
+        </button>
+
+        <div class="browse-toolbar">
+          <div class="browse-result-count" id="resultCount">–</div>
+          <div class="browse-controls">
+            <select class="sort-select" id="sortSelect">
+              <option value="featured">Featured zuerst</option>
+              <option value="newest">Neueste zuerst</option>
+              <option value="price-asc">Preis: Aufsteigend</option>
+              <option value="price-desc">Preis: Absteigend</option>
+              <option value="words-desc">Meiste Wörter</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-toggle__btn active" data-view="grid" title="Rasteransicht">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                </svg>
+              </button>
+              <button class="view-toggle__btn" data-view="list" title="Listenansicht">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+                  <line x1="8" y1="18" x2="21" y2="18"/>
+                  <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
+                  <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active filter chips -->
+        <div class="active-filters" id="activeFilters"></div>
+
+        <!-- Listings -->
+        <div class="listings-grid" id="listingsContainer">
+          <!-- rendered by JS -->
+        </div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">ReadyTo<span>Publish</span></div>
+        <p class="footer__tagline">Der Marktplatz für druckfertige Buchprojekte.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Marktplatz</div>
+        <div class="footer__links">
+          <a href="browse.html" class="footer__link">Alle Listings</a>
+          <a href="browse.html?category=fantasy" class="footer__link">Fantasy</a>
+          <a href="browse.html?category=thriller" class="footer__link">Thriller</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Verkaufen</div>
+        <div class="footer__links">
+          <a href="sell.html" class="footer__link">Listing erstellen</a>
+          <a href="#" class="footer__link">Seller-Guide</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Unternehmen</div>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Über uns</a>
+          <a href="#" class="footer__link">Datenschutz</a>
+          <a href="#" class="footer__link">AGB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ReadyToPublish. Alle Rechte vorbehalten.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/browse.js"></script>
+</body>
+</html>

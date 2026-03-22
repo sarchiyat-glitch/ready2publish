@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buchprojekt verkaufen — ReadyToPublish</title>
+  <meta name="description" content="Stell dein druckfertiges Buchprojekt auf ReadyToPublish ein und erreiche Verlage, Agenten und Buchkäufer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sell.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">ReadyTo<span>Publish</span></a>
+      <div class="nav__links">
+        <a href="browse.html" class="nav__link">Durchsuchen</a>
+        <a href="sell.html" class="nav__link">Buch verkaufen</a>
+        <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
+      </div>
+      <div class="nav__actions">
+        <a href="#" class="btn btn--outline btn--sm">Anmelden</a>
+      </div>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile">
+    <a href="browse.html" class="nav__link">Durchsuchen</a>
+    <a href="sell.html" class="nav__link">Buch verkaufen</a>
+    <a href="#" class="btn btn--outline btn--sm" style="margin-top:8px">Anmelden</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="sell-hero">
+  <div class="container">
+    <h1 class="sell-hero__title">Dein Buchprojekt verkaufen</h1>
+    <p class="sell-hero__subtitle">Erstelle dein Listing in wenigen Minuten und erreiche tausende Käufer</p>
+    <div class="sell-hero__stats">
+      <div>
+        <div class="sell-hero__stat-value">200+</div>
+        <div class="sell-hero__stat-label">Aktive Autoren</div>
+      </div>
+      <div>
+        <div class="sell-hero__stat-value">Ø 12 Tage</div>
+        <div class="sell-hero__stat-label">Bis zum Verkauf</div>
+      </div>
+      <div>
+        <div class="sell-hero__stat-value">Ø €1.900</div>
+        <div class="sell-hero__stat-label">Listenpreis</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Step indicator -->
+<div class="step-indicator">
+  <div class="container">
+    <div class="step-indicator__inner">
+      <div class="step" data-step-indicator="1">
+        <div class="step__num">1</div>
+        <span class="step__label">Paket-Info</span>
+      </div>
+      <div class="step-connector" data-step-connector="1"></div>
+      <div class="step" data-step-indicator="2">
+        <div class="step__num">2</div>
+        <span class="step__label">Preis & Paket</span>
+      </div>
+      <div class="step-connector" data-step-connector="2"></div>
+      <div class="step" data-step-indicator="3">
+        <div class="step__num">3</div>
+        <span class="step__label">Details & Dateien</span>
+      </div>
+      <div class="step-connector" data-step-connector="3"></div>
+      <div class="step" data-step-indicator="4">
+        <div class="step__num">4</div>
+        <span class="step__label">Prüfen & Absenden</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sell body -->
+<div class="sell-body">
+  <div class="container">
+    <div class="sell-layout">
+
+      <!-- Form card -->
+      <div id="sell-form-card" class="sell-form-card">
+
+        <!-- Success message (hidden) -->
+        <div id="submitSuccess" style="display:none; text-align:center; padding: var(--space-12) var(--space-8)">
+          <div style="font-size: 64px; margin-bottom: var(--space-4)">🎉</div>
+          <h2 style="font-family: var(--font-serif); font-size: var(--text-3xl); margin-bottom: var(--space-4)">Listing eingereicht!</h2>
+          <p style="color: var(--color-text-muted); font-size: var(--text-lg); margin-bottom: var(--space-8)">
+            Dein Buchprojekt wird geprüft und innerhalb von 24 Stunden freigeschaltet.
+            Du erhältst eine Bestätigung per E-Mail.
+          </p>
+          <a href="browse.html" class="btn btn--primary btn--lg">Alle Listings ansehen</a>
+        </div>
+
+        <!-- Step 1: Package Info -->
+        <div class="sell-form-step" data-step="1">
+          <h2 class="sell-step-title">Paket-Informationen</h2>
+          <p class="sell-step-subtitle">Beschreibe dein Buchprojekt so vollständig wie möglich.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="inputTitle">Buchtitel *</label>
+            <input type="text" class="form-input" id="inputTitle" placeholder="z.B. Der Kartograf der verlorenen Welten">
+          </div>
+
+          <div class="form-row" style="margin-top: var(--space-5)">
+            <div class="form-group">
+              <label class="form-label" for="inputGenre">Genre *</label>
+              <select class="form-select" id="inputGenre">
+                <option value="">Genre wählen…</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="romance">Romance</option>
+                <option value="thriller">Thriller</option>
+                <option value="scifi">Sci-Fi</option>
+                <option value="mystery">Mystery</option>
+                <option value="nonfiction">Non-Fiction</option>
+                <option value="children">Children's</option>
+                <option value="business">Business</option>
+                <option value="selfhelp">Self-Help</option>
+                <option value="biography">Biographie</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputAudience">Zielgruppe</label>
+              <select class="form-select" id="inputAudience">
+                <option value="adult">Erwachsene</option>
+                <option value="ya">Young Adult</option>
+                <option value="middle-grade">Middle Grade</option>
+                <option value="children">Kinder</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-5)">
+            <label class="form-label" for="inputWordCount">Wortanzahl</label>
+            <input type="number" class="form-input" id="inputWordCount" placeholder="z.B. 85000" min="1000">
+            <span class="form-hint">Ungefähre Wortanzahl des Manuskripts</span>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-5)">
+            <label class="form-label" for="inputShortDesc">Kurzbeschreibung (max. 280 Zeichen)</label>
+            <textarea class="form-textarea" id="inputShortDesc" placeholder="Ein kurzer, packender Klappentext für Käufer…" style="min-height:80px; resize:none"></textarea>
+            <div class="form-char-count" id="shortDescCount">0/280</div>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-5)">
+            <label class="form-label" for="inputFullDesc">Vollständige Beschreibung</label>
+            <textarea class="form-textarea" id="inputFullDesc" placeholder="Beschreibe das Buch, seine Besonderheiten, Bearbeitungsstand, etc.…" style="min-height:160px"></textarea>
+          </div>
+
+          <div class="sell-form-nav">
+            <div></div>
+            <button class="btn btn--primary btn--lg" data-next>Weiter →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Pricing & Package -->
+        <div class="sell-form-step" data-step="2">
+          <h2 class="sell-step-title">Preis & Pakettyp</h2>
+          <p class="sell-step-subtitle">Wähle, was du verkaufst, und lege deinen Preis fest.</p>
+
+          <div class="form-group">
+            <label class="form-label">Pakettyp *</label>
+            <div class="package-cards">
+              <label class="package-card selected">
+                <input type="radio" name="packageType" value="manuscript" checked>
+                <div class="package-card__icon">📄</div>
+                <div>
+                  <div class="package-card__label">Nur Manuskript</div>
+                  <div class="package-card__desc">Textdateien (.docx, .pdf)</div>
+                </div>
+              </label>
+              <label class="package-card">
+                <input type="radio" name="packageType" value="cover">
+                <div class="package-card__icon">🎨</div>
+                <div>
+                  <div class="package-card__label">Manuskript + Cover</div>
+                  <div class="package-card__desc">Textdateien plus Cover-Design</div>
+                </div>
+              </label>
+              <label class="package-card">
+                <input type="radio" name="packageType" value="full">
+                <div class="package-card__icon">📦</div>
+                <div>
+                  <div class="package-card__label">Komplettes Paket</div>
+                  <div class="package-card__desc">Manuskript, Cover, Synopse, Series Bible & mehr</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-6)">
+            <label class="form-label" for="inputPrice">Verkaufspreis (€) *</label>
+            <input type="number" class="form-input" id="inputPrice" placeholder="z.B. 2000" min="100" step="50">
+            <div class="price-hint">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              Empfehlung: €800 – €1.200 (Manuskript only) · €1.500 – €2.500 (+ Cover) · €2.500 – €4.000+ (Full Package)
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-5)">
+            <label class="checkbox-item">
+              <input type="checkbox" id="inputNegotiable">
+              <span class="checkbox-item__label">Preis ist verhandelbar</span>
+            </label>
+          </div>
+
+          <div class="sell-form-nav">
+            <button class="btn btn--outline-dark btn--lg" data-prev>← Zurück</button>
+            <button class="btn btn--primary btn--lg" data-next>Weiter →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Upload Details -->
+        <div class="sell-form-step" data-step="3">
+          <h2 class="sell-step-title">Details & Datei-Infos</h2>
+          <p class="sell-step-subtitle">Welche Formate liefere ich? Wie lange dauert die Übergabe?</p>
+
+          <div class="form-group">
+            <label class="form-label">Verfügbare Formate</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item">
+                <input type="checkbox" name="formats" value=".docx" checked>
+                <span class="checkbox-item__label">.docx (Word)</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="formats" value=".pdf" checked>
+                <span class="checkbox-item__label">.pdf</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="formats" value=".epub">
+                <span class="checkbox-item__label">.epub</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="formats" value=".psd">
+                <span class="checkbox-item__label">.psd (Cover Source)</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="formats" value=".ai">
+                <span class="checkbox-item__label">.ai (Illustrator)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: var(--space-6)">
+            <div class="form-group">
+              <label class="form-label" for="inputDelivery">Lieferzeit nach Kauf</label>
+              <select class="form-select" id="inputDelivery">
+                <option value="sofort">Sofort (Download-Link)</option>
+                <option value="24h">Innerhalb 24 Std.</option>
+                <option value="48h">Innerhalb 48 Std.</option>
+                <option value="1week">Innerhalb 1 Woche</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inputRevision">Überarbeitungen</label>
+              <select class="form-select" id="inputRevision">
+                <option value="none">Keine Überarbeitungen</option>
+                <option value="minor">Kleinere Korrekturen (Tippfehler)</option>
+                <option value="discuss">Nach Absprache</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-5)">
+            <label class="form-label" for="inputExcerpt">Leseprobe (wird Käufern vor dem Kauf angezeigt)</label>
+            <textarea class="form-textarea" id="inputExcerpt" placeholder="Gib einen kurzen Auszug aus dem Buch ein (1–3 Absätze)…" style="min-height:140px"></textarea>
+            <span class="form-hint">Eine gute Leseprobe erhöht die Kaufwahrscheinlichkeit erheblich.</span>
+          </div>
+
+          <div class="sell-form-nav">
+            <button class="btn btn--outline-dark btn--lg" data-prev>← Zurück</button>
+            <button class="btn btn--primary btn--lg" data-next>Prüfen & Absenden →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Submit -->
+        <div class="sell-form-step" data-step="4">
+          <h2 class="sell-step-title">Prüfen & Absenden</h2>
+          <p class="sell-step-subtitle">So sieht dein Listing für Käufer aus.</p>
+
+          <div id="reviewSummary">
+            <!-- rendered by JS -->
+          </div>
+
+          <div class="terms-box">
+            <label class="checkbox-item" style="align-items:flex-start">
+              <input type="checkbox" id="acceptTerms" style="margin-top:3px">
+              <span class="checkbox-item__label" style="font-size: var(--text-sm); line-height: 1.7">
+                Ich bestätige, dass ich alle Rechte an dem eingestellten Buchprojekt besitze oder ordnungsgemäß für den Verkauf bevollmächtigt bin. Ich akzeptiere die
+                <a href="#" style="color:var(--color-gold)">Allgemeinen Geschäftsbedingungen</a> und die
+                <a href="#" style="color:var(--color-gold)">Datenschutzbestimmungen</a> von ReadyToPublish.
+              </span>
+            </label>
+          </div>
+
+          <div class="sell-form-nav">
+            <button class="btn btn--outline-dark btn--lg" data-prev>← Zurück</button>
+            <button class="btn btn--primary btn--lg" id="submitBtn">Listing einreichen ✓</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right sidebar -->
+      <div>
+        <!-- Live preview -->
+        <div class="sell-preview-card">
+          <div class="sell-preview-card__label">Live-Vorschau</div>
+          <div class="sell-preview-card__content" id="previewContent">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="sell-tips" style="margin-top: var(--space-5)">
+          <div class="sell-tips__title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Tipps für bessere Listings
+          </div>
+          <div class="sell-tips__list">
+            <div class="sell-tips__item">Ein vollständiges Paket (mit Cover) verkauft sich 3× schneller als Manuskript-only.</div>
+            <div class="sell-tips__item">Wähle einen Preis im empfohlenen Bereich — zu niedrig signalisiert mangelnde Qualität.</div>
+            <div class="sell-tips__item">Eine starke Leseprobe ist das wichtigste Verkaufsargument. Wähle die spannendste Passage.</div>
+            <div class="sell-tips__item">Erwähne deinen Bearbeitungsstand: Wurde das Manuskript lektoriert? Beta-gelesen?</div>
+            <div class="sell-tips__item">Comp-Titel helfen Käufern: Vergleiche dein Buch mit bekannten Werken im gleichen Genre.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">ReadyTo<span>Publish</span></div>
+        <p class="footer__tagline">Der Marktplatz für druckfertige Buchprojekte.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Marktplatz</div>
+        <div class="footer__links">
+          <a href="browse.html" class="footer__link">Listings durchsuchen</a>
+          <a href="sell.html" class="footer__link">Listing erstellen</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Unternehmen</div>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Über uns</a>
+          <a href="#" class="footer__link">Datenschutz</a>
+          <a href="#" class="footer__link">AGB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ReadyToPublish. Alle Rechte vorbehalten.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/sell.js"></script>
+</body>
+</html>

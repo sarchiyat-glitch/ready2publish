@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing — ReadyToPublish</title>
+  <meta name="description" content="Buchprojekt-Details auf ReadyToPublish">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/listing.css">
+</head>
+<body class="listing-page">
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">ReadyTo<span>Publish</span></a>
+      <div class="nav__links">
+        <a href="browse.html" class="nav__link">Durchsuchen</a>
+        <a href="sell.html" class="nav__link">Buch verkaufen</a>
+        <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
+      </div>
+      <div class="nav__actions">
+        <a href="#" class="btn btn--outline btn--sm">Anmelden</a>
+        <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+      </div>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile">
+    <a href="browse.html" class="nav__link">Durchsuchen</a>
+    <a href="sell.html" class="nav__link">Buch verkaufen</a>
+    <a href="#" class="btn btn--outline btn--sm" style="margin-top:8px">Anmelden</a>
+    <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+  </div>
+</nav>
+
+<div id="listingContent">
+
+  <!-- Breadcrumb -->
+  <div class="listing-breadcrumb">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Startseite</a>
+        <span class="breadcrumb__sep">›</span>
+        <a href="browse.html">Listings</a>
+        <span class="breadcrumb__sep">›</span>
+        <a href="#" id="breadcrumbGenre"></a>
+        <span class="breadcrumb__sep">›</span>
+        <span id="breadcrumbTitle"></span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="listing-hero">
+    <div class="container">
+      <div class="listing-hero__layout">
+
+        <!-- Cover -->
+        <div>
+          <div class="listing-cover" id="listingCover">
+            <svg class="listing-cover__icon" viewBox="0 0 48 48" fill="rgba(255,255,255,0.25)">
+              <path d="M8 6a2 2 0 012-2h18l12 12v26a2 2 0 01-2 2H10a2 2 0 01-2-2V6z"/>
+              <path d="M28 4l12 12H28V4z" opacity=".4"/>
+              <rect x="14" y="22" width="20" height="2" rx="1" opacity=".5"/>
+              <rect x="14" y="28" width="14" height="2" rx="1" opacity=".5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div>
+          <div class="listing-details__header">
+            <div class="listing-details__meta">
+              <div id="listingBadges"></div>
+              <span class="listing-details__date" id="listingDate"></span>
+            </div>
+            <h1 class="listing-details__title" id="listingTitle"></h1>
+            <p class="listing-details__author" id="listingAuthor"></p>
+          </div>
+
+          <!-- Price box -->
+          <div class="listing-price-box">
+            <div class="listing-price-box__price" id="listingPrice"></div>
+            <div class="listing-price-box__note" id="listingPriceNote"></div>
+            <div class="listing-price-box__ctas">
+              <a href="#" class="btn btn--primary btn--lg btn--full">Paket kaufen</a>
+              <a href="#" class="btn btn--outline-dark btn--lg btn--full">Frage stellen</a>
+            </div>
+          </div>
+
+          <!-- Includes -->
+          <div class="listing-includes">
+            <div class="listing-includes__title">Paketinhalt</div>
+            <div class="listing-includes__list" id="listingIncludes"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="listing-stats">
+    <div class="container">
+      <div class="listing-stats__grid">
+        <div class="listing-stat">
+          <div class="listing-stat__label">Wortanzahl</div>
+          <div class="listing-stat__value" id="statWords"></div>
+        </div>
+        <div class="listing-stat">
+          <div class="listing-stat__label">Genre</div>
+          <div class="listing-stat__value" id="statGenre"></div>
+        </div>
+        <div class="listing-stat">
+          <div class="listing-stat__label">Zielgruppe</div>
+          <div class="listing-stat__value" id="statAudience"></div>
+        </div>
+        <div class="listing-stat">
+          <div class="listing-stat__label">Sprache</div>
+          <div class="listing-stat__value" id="statLanguage"></div>
+        </div>
+        <div class="listing-stat">
+          <div class="listing-stat__label">Pakettyp</div>
+          <div class="listing-stat__value" id="statPackage"></div>
+        </div>
+        <div class="listing-stat">
+          <div class="listing-stat__label">Eingestellt</div>
+          <div class="listing-stat__value" id="statDate"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="listing-content">
+    <div class="container">
+      <div class="listing-content-layout">
+
+        <!-- Main column -->
+        <div>
+          <div class="listing-section">
+            <h2 class="listing-section__title">Über das Buch</h2>
+            <div class="listing-section__body" id="listingDescription"></div>
+          </div>
+
+          <div class="listing-excerpt">
+            <p class="listing-excerpt__text" id="listingExcerpt"></p>
+          </div>
+
+          <div class="listing-section" style="margin-top: var(--space-8)">
+            <h2 class="listing-section__title">Schlagwörter</h2>
+            <div class="listing-tags" id="listingTags"></div>
+          </div>
+        </div>
+
+        <!-- Sidebar: Seller card -->
+        <div>
+          <div class="seller-card">
+            <div class="seller-card__header">
+              <div id="sellerAvatar"></div>
+              <div class="seller-card__info">
+                <div class="seller-card__name" id="sellerName"></div>
+                <div class="seller-card__since" id="sellerSince"></div>
+              </div>
+            </div>
+            <div id="sellerRating" style="margin-bottom: var(--space-4)"></div>
+            <div class="seller-card__stats">
+              <div>
+                <div class="seller-card__stat-label">Listings</div>
+                <div class="seller-card__stat-value" id="sellerListings"></div>
+              </div>
+              <div>
+                <div class="seller-card__stat-label">Antwortzeit</div>
+                <div class="seller-card__stat-value" id="sellerResponse"></div>
+              </div>
+            </div>
+            <p class="seller-card__bio" id="sellerBio"></p>
+            <a href="#" class="btn btn--outline-dark btn--sm btn--full" id="sellerListingsLink">
+              Alle Listings ansehen →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Similar listings -->
+  <div class="similar-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Ähnliche Buchprojekte</h2>
+          <p class="section-subtitle">Im gleichen Genre</p>
+        </div>
+        <a href="browse.html" class="section-link">Alle ansehen →</a>
+      </div>
+      <div class="similar-grid" id="similarListings"></div>
+    </div>
+  </div>
+
+</div><!-- /#listingContent -->
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">ReadyTo<span>Publish</span></div>
+        <p class="footer__tagline">Der Marktplatz für druckfertige Buchprojekte.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Marktplatz</div>
+        <div class="footer__links">
+          <a href="browse.html" class="footer__link">Alle Listings</a>
+          <a href="sell.html" class="footer__link">Listing erstellen</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Unternehmen</div>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Über uns</a>
+          <a href="#" class="footer__link">Datenschutz</a>
+          <a href="#" class="footer__link">AGB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ReadyToPublish. Alle Rechte vorbehalten.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/listing.js"></script>
+</body>
+</html>

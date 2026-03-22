@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadyToPublish — Fertige Buchprojekte kaufen & verkaufen</title>
+  <meta name="description" content="Der Marktplatz für druckfertige Buchprojekte. Kaufe und verkaufe vollständige Manuskripte, Cover-Designs und komplette Publishing-Pakete.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">ReadyTo<span>Publish</span></a>
+      <div class="nav__links">
+        <a href="browse.html" class="nav__link">Durchsuchen</a>
+        <a href="sell.html" class="nav__link">Buch verkaufen</a>
+        <a href="#how-it-works" class="nav__link">So funktioniert's</a>
+      </div>
+      <div class="nav__actions">
+        <a href="#" class="btn btn--outline btn--sm">Anmelden</a>
+        <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+      </div>
+      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile">
+    <a href="browse.html" class="nav__link">Durchsuchen</a>
+    <a href="sell.html" class="nav__link">Buch verkaufen</a>
+    <a href="#how-it-works" class="nav__link">So funktioniert's</a>
+    <a href="#" class="btn btn--outline btn--sm" style="margin-top:8px">Anmelden</a>
+    <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__eyebrow">
+        <span class="hero__eyebrow-dot"></span>
+        Der Marktplatz für druckfertige Buchprojekte
+      </div>
+      <h1 class="hero__title">Fertige Bücher.<br><em>Sofort bereit</em><br>für Verlage.</h1>
+      <p class="hero__subtitle">
+        Kaufe und verkaufe vollständige Buchprojekte — polierte Manuskripte,
+        professionelle Cover-Designs, komplette Pakete. Kein Ghostwriting.
+        Kein Warten. Nur publish-ready Werke.
+      </p>
+      <div class="hero__ctas">
+        <a href="browse.html" class="btn btn--primary btn--lg">Listings durchsuchen</a>
+        <a href="sell.html" class="btn btn--outline btn--lg">Buch einstellen</a>
+      </div>
+      <div class="hero__trust">
+        <div class="trust-item">
+          <span class="trust-item__dot"></span>
+          <span>500+ Manuskripte gelistet</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__dot"></span>
+          <span>Ø Antwortzeit 24 Std.</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-item__dot"></span>
+          <span>Sicheres Escrow-System</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category strip -->
+<section class="categories-section">
+  <div class="container">
+    <div class="categories-scroll" id="categoriesStrip">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Featured Listings -->
+<section class="section featured-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Featured Listings</h2>
+        <p class="section-subtitle">Handverlesene Buchprojekte unserer Top-Autoren</p>
+      </div>
+      <a href="browse.html" class="section-link">Alle ansehen →</a>
+    </div>
+    <div class="listings-grid--featured" id="featuredListings">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section--lg how-section" id="how-it-works">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: var(--space-4)">
+      <h2 class="section-title" style="color: white">So funktioniert ReadyToPublish</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.55); margin-top: var(--space-3)">
+        Vom ersten Klick bis zur Übergabe — in drei Schritten
+      </p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step__number">1</div>
+        <h3 class="how-step__title">Entdecken & Durchstöbern</h3>
+        <p class="how-step__text">
+          Durchsuche hunderte vollständig ausgearbeiteter Buchprojekte.
+          Filtere nach Genre, Wortanzahl, Zielgruppe und Paketumfang.
+          Lies Auszüge, prüfe Seller-Profile.
+        </p>
+      </div>
+      <div class="how-step">
+        <div class="how-step__number">2</div>
+        <h3 class="how-step__title">Paket prüfen & anfragen</h3>
+        <p class="how-step__text">
+          Jedes Listing zeigt genau, was enthalten ist: Manuskript, Cover,
+          Synopse, Series Bible. Stelle Fragen direkt an den Autor.
+          Vereinbare bei Bedarf Konditionen.
+        </p>
+      </div>
+      <div class="how-step">
+        <div class="how-step__number">3</div>
+        <h3 class="how-step__title">Kaufen & Dateien erhalten</h3>
+        <p class="how-step__text">
+          Sicherer Kauf via Escrow. Nach Zahlungseingang erhältst du alle
+          Dateien sofort digital. Vollständige Rechteübertragung inklusive.
+          Fertig zum Veröffentlichen.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Was unsere Community sagt</h2>
+        <p class="section-subtitle">Autoren, Verlage und Agenten vertrauen ReadyToPublish</p>
+      </div>
+    </div>
+    <div class="testimonials-grid" id="testimonialsGrid">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Sell CTA -->
+<section class="sell-cta-section">
+  <div class="container">
+    <div class="sell-cta-inner">
+      <div>
+        <h2 class="sell-cta__title">Hast du ein fertiges<br>Buchprojekt?</h2>
+        <p class="sell-cta__text">
+          Stell dein poliertes Manuskript, Cover-Design oder komplettes Buchpaket
+          ein — und erreiche Verlage, Agenten und Buchkäufer direkt.
+          Keine Exklusivitätspflicht. Du behältst die Kontrolle.
+        </p>
+        <div style="margin-top: var(--space-8); display:flex; gap: var(--space-4); flex-wrap:wrap">
+          <a href="sell.html" class="btn btn--lg" style="background: var(--color-navy); color: white">Jetzt verkaufen</a>
+          <a href="#how-it-works" class="btn btn--outline-dark btn--lg">Mehr erfahren</a>
+        </div>
+      </div>
+      <div class="sell-cta__stats">
+        <div class="sell-cta__stat">
+          <div class="sell-cta__stat-value">Ø €1.900</div>
+          <div class="sell-cta__stat-label">Durchschnittlicher Listenpreis</div>
+        </div>
+        <div class="sell-cta__stat">
+          <div class="sell-cta__stat-value">12 Tage</div>
+          <div class="sell-cta__stat-label">Ø Zeit bis zum Verkauf</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">ReadyTo<span>Publish</span></div>
+        <p class="footer__tagline">
+          Der Marktplatz für druckfertige Buchprojekte.
+          Verbinde Autoren mit Verlagen, Agenten und Buchkäufern weltweit.
+        </p>
+      </div>
+      <div>
+        <div class="footer__heading">Marktplatz</div>
+        <div class="footer__links">
+          <a href="browse.html" class="footer__link">Listings durchsuchen</a>
+          <a href="browse.html?category=fantasy" class="footer__link">Fantasy</a>
+          <a href="browse.html?category=thriller" class="footer__link">Thriller</a>
+          <a href="browse.html?category=nonfiction" class="footer__link">Non-Fiction</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Verkaufen</div>
+        <div class="footer__links">
+          <a href="sell.html" class="footer__link">Listing erstellen</a>
+          <a href="#" class="footer__link">Preisempfehlungen</a>
+          <a href="#" class="footer__link">Seller-Guide</a>
+          <a href="#" class="footer__link">FAQ</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__heading">Unternehmen</div>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Über uns</a>
+          <a href="#" class="footer__link">Blog</a>
+          <a href="#" class="footer__link">Datenschutz</a>
+          <a href="#" class="footer__link">AGB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 ReadyToPublish. Alle Rechte vorbehalten.</span>
+      <span style="color: rgba(255,255,255,0.3)">Made for authors, by authors.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { listings, testimonials, categories } from './js/data.js';
+  import { renderListingCard, renderCategoryPills, starRating, sellerAvatar } from './js/components.js';
+  import { initNav, setActiveNavLink } from './js/main.js';
+
+  // Nav
+  initNav();
+  setActiveNavLink();
+
+  // Categories
+  const strip = document.getElementById('categoriesStrip');
+  strip.innerHTML = renderCategoryPills();
+
+  // Featured listings
+  const featured = listings.filter(l => l.featured);
+  const grid = document.getElementById('featuredListings');
+  grid.innerHTML = featured.map(l => renderListingCard(l, 'grid')).join('');
+
+  // Testimonials
+  const tGrid = document.getElementById('testimonialsGrid');
+  tGrid.innerHTML = testimonials.map(t => `
+    <div class="testimonial-card">
+      <p class="testimonial-card__quote">${t.text}</p>
+      <div class="testimonial-card__author">
+        <div class="seller-avatar" style="background:${t.color}">${t.initials}</div>
+        <div>
+          ${starRating(t.rating)}
+          <div class="testimonial-card__name">${t.name}</div>
+          <div class="testimonial-card__role">${t.role}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+</script>
+</body>
+</html>
