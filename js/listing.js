@@ -1,111 +1,101 @@
 import { listings } from './data.js';
-import { renderListingCard, genreBadge, packageBadge, formatPrice, formatWordCount, sellerAvatar, getSellerById, starRating } from './components.js';
-import { initNav, setActiveNavLink } from './main.js';
+import { cover, bookCard, esc, euro, num, date, genreLabel, packageLabel, audienceLabel, sellerById } from './components.js';
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
-}
+const main = document.getElementById('content');
+const id = new URLSearchParams(location.search).get('id');
+const l = listings.find(x => x.id === id);
 
-function getAudienceLabel(audience) {
-  const map = { adult: 'Erwachsene', ya: 'Young Adult', children: "Kinder", 'middle-grade': 'Middle Grade' };
-  return map[audience] || audience;
-}
+if (!l) {
+  main.innerHTML = `<div class="wrap"><div class="empty" style="margin:80px 0">
+    <h3>Projekt nicht gefunden</h3><p>Dieses Projekt gibt es nicht oder es wurde zurückgezogen.</p>
+    <a class="btn" href="browse.html">Zum Marktplatz</a></div></div>`;
+} else {
+  document.title = `${l.title} – ReadyToPublish`;
+  const s = sellerById(l.sellerId);
+  const initials = s ? s.name.split(' ').map(p => p[0]).join('') : '?';
+  const memberSince = s ? new Date(s.since + '-01').toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) : '';
+  const similar = listings.filter(x => x.id !== l.id && x.genre === l.genre)
+    .concat(listings.filter(x => x.id !== l.id && x.genre !== l.genre && x.sellerId === l.sellerId))
+    .slice(0, 4);
 
-document.addEventListener('DOMContentLoaded', () => {
-  initNav();
-  setActiveNavLink();
+  main.innerHTML = `
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Brotkrumen">
+      <a href="browse.html">Marktplatz</a><span>/</span>
+      <a href="browse.html?genre=${l.genre}">${esc(genreLabel(l.genre))}</a><span>/</span>
+      ${esc(l.title)}
+    </nav>
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-  const listing = listings.find(l => l.id === id);
+    <article class="detail">
+      <div class="detail__cover">${cover(l)}</div>
 
-  if (!listing) {
-    document.getElementById('listingContent').innerHTML = `
-      <div class="container" style="padding-block: var(--space-20); text-align:center">
-        <h2 style="font-family: var(--font-serif); font-size: var(--text-3xl); margin-bottom: var(--space-4)">Listing nicht gefunden</h2>
-        <p style="color: var(--color-text-muted); margin-bottom: var(--space-8)">Dieses Listing existiert nicht oder wurde entfernt.</p>
-        <a href="browse.html" class="btn btn--primary btn--lg">Zurück zur Übersicht</a>
-      </div>`;
-    return;
-  }
+      <div>
+        <p class="kicker kicker--accent">${esc(genreLabel(l.genre))} · ${esc(packageLabel(l.package))}</p>
+        <h1 class="display">${esc(l.title)}</h1>
+        <p class="detail__author">von <a href="browse.html?verkaeufer=${l.sellerId}">${esc(l.author)}</a></p>
+        <p class="detail__pitch">${esc(l.pitch)}</p>
 
-  const seller = getSellerById(listing.sellerId);
-  const gradient = `linear-gradient(160deg, ${listing.coverGradient.join(', ')})`;
+        <div class="buybox">
+          <div>
+            <div class="price">${euro(l.price)}</div>
+            <div class="buybox__note">${l.negotiable ? 'Preis verhandelbar' : 'Festpreis'} · inkl. aller Rechte</div>
+          </div>
+          <div class="buybox__actions">
+            <button class="btn btn--ghost" type="button" data-demo>Frage stellen</button>
+            <button class="btn btn--accent" type="button" data-demo>Projekt kaufen</button>
+          </div>
+        </div>
 
-  // Breadcrumb
-  document.getElementById('breadcrumbGenre').textContent = listing.genre.charAt(0).toUpperCase() + listing.genre.slice(1);
-  document.getElementById('breadcrumbTitle').textContent = listing.title;
+        <dl class="facts">
+          <div><dt>Umfang</dt><dd>${num(l.words)} Wörter</dd></div>
+          <div><dt>Zielgruppe</dt><dd>${esc(audienceLabel(l.audience))}</dd></div>
+          <div><dt>Eingestellt</dt><dd>${date(l.listed)}</dd></div>
+        </dl>
 
-  // Cover
-  document.getElementById('listingCover').style.background = gradient;
+        <section class="detail-section">
+          <h2>Über das Buch</h2>
+          <div class="prose">${l.description.split('\n\n').map(p => `<p>${esc(p)}</p>`).join('')}</div>
+        </section>
 
-  // Details
-  document.getElementById('listingBadges').innerHTML = genreBadge(listing.genre) + packageBadge(listing.packageType);
-  document.getElementById('listingDate').textContent = 'Eingestellt: ' + formatDate(listing.listedDate);
-  document.getElementById('listingTitle').textContent = listing.title;
-  document.getElementById('listingAuthor').textContent = 'von ' + listing.author;
-  document.title = listing.title + ' — ReadyToPublish';
+        <section class="detail-section">
+          <h2>Leseprobe</h2>
+          <blockquote class="excerpt"><p>${esc(l.excerpt)}</p></blockquote>
+        </section>
 
-  // Price box
-  document.getElementById('listingPrice').textContent = formatPrice(listing.price);
-  document.getElementById('listingPriceNote').textContent = listing.negotiable ? 'Preis verhandelbar' : 'Festpreis';
+        <section class="detail-section">
+          <h2>Im Paket enthalten</h2>
+          <ul class="includes">${l.includes.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+        </section>
 
-  // Includes
-  document.getElementById('listingIncludes').innerHTML = listing.includes.map(item => `
-    <div class="listing-includes__item">
-      <div class="listing-includes__check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+        <section class="detail-section">
+          <h2>Schlagwörter</h2>
+          <div class="tags">${l.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        </section>
+
+        ${s ? `<section class="detail-section">
+          <h2>Verkauft von</h2>
+          <div class="seller">
+            <div class="avatar" aria-hidden="true">${esc(initials)}</div>
+            <div>
+              <h3>${esc(s.name)}</h3>
+              <div class="seller__meta">${esc(s.city)} · dabei seit ${memberSince} · antwortet ${esc(s.response)}</div>
+              <p>${esc(s.bio)}</p>
+              <a class="link" href="browse.html?verkaeufer=${s.id}">Alle Projekte von ${esc(s.name.split(' ')[0])} →</a>
+            </div>
+          </div>
+        </section>` : ''}
       </div>
-      <span>${item}</span>
+    </article>
+  </div>
+
+  ${similar.length ? `<section class="section section--tint">
+    <div class="wrap">
+      <div class="section-head"><div><p class="kicker">Weiterstöbern</p><h2 class="h2">Das könnte auch passen</h2></div></div>
+      <div class="book-grid">${similar.map(bookCard).join('')}</div>
     </div>
-  `).join('');
+  </section>` : ''}`;
 
-  // Stats
-  const genreLabels = {
-    fantasy: 'Fantasy', romance: 'Romance', thriller: 'Thriller',
-    scifi: 'Sci-Fi', nonfiction: 'Non-Fiction', children: "Children's",
-    business: 'Business', selfhelp: 'Self-Help', mystery: 'Mystery'
-  };
-  document.getElementById('statWords').textContent = formatWordCount(listing.wordCount) + ' Wörter';
-  document.getElementById('statGenre').textContent = genreLabels[listing.genre] || listing.genre;
-  document.getElementById('statAudience').textContent = getAudienceLabel(listing.audience);
-  document.getElementById('statLanguage').textContent = 'Englisch';
-  document.getElementById('statPackage').innerHTML = packageBadge(listing.packageType);
-  document.getElementById('statDate').textContent = formatDate(listing.listedDate);
-
-  // Description
-  document.getElementById('listingDescription').innerHTML = listing.description
-    .split('\n\n').map(p => `<p>${p}</p>`).join('');
-
-  // Excerpt
-  document.getElementById('listingExcerpt').textContent = listing.excerpt;
-
-  // Tags
-  document.getElementById('listingTags').innerHTML = listing.tags.map(t =>
-    `<span class="chip">${t}</span>`
-  ).join('');
-
-  // Seller card
-  if (seller) {
-    document.getElementById('sellerAvatar').innerHTML = sellerAvatar(seller, 'lg');
-    document.getElementById('sellerName').textContent = seller.name;
-    document.getElementById('sellerSince').textContent = 'Mitglied seit ' + new Date(seller.memberSince + '-01').toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
-    document.getElementById('sellerRating').innerHTML = starRating(seller.rating) + ` <span style="font-size:var(--text-xs); color:var(--color-text-muted)">${seller.rating}</span>`;
-    document.getElementById('sellerListings').textContent = seller.listingsCount + ' Listings';
-    document.getElementById('sellerResponse').textContent = seller.responseTime;
-    document.getElementById('sellerBio').textContent = seller.bio;
-    document.getElementById('sellerListingsLink').href = `browse.html?seller=${seller.id}`;
-  }
-
-  // Similar listings
-  const similar = listings.filter(l => l.id !== listing.id && l.genre === listing.genre).slice(0, 3);
-  const similarGrid = document.getElementById('similarListings');
-  if (similar.length > 0) {
-    similarGrid.innerHTML = similar.map(l => renderListingCard(l, 'grid')).join('');
-  } else {
-    document.querySelector('.similar-section').style.display = 'none';
-  }
-});
+  main.querySelectorAll('[data-demo]').forEach(b => b.addEventListener('click', () => {
+    alert('Dies ist ein Prototyp – Käufe und Nachrichten sind noch nicht freigeschaltet.');
+  }));
+}

@@ -2,205 +2,83 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listings durchsuchen — ReadyToPublish</title>
-  <meta name="description" content="Durchsuche hunderte druckfertige Buchprojekte nach Genre, Wortanzahl, Pakettyp und Preis.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marktplatz – ReadyToPublish</title>
+  <meta name="description" content="Fertige Buchprojekte nach Genre, Umfang, Paket und Preis durchsuchen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/browse.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-<!-- Navigation -->
-<nav class="nav">
-  <div class="container">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo">ReadyTo<span>Publish</span></a>
-      <div class="nav__links">
-        <a href="browse.html" class="nav__link">Durchsuchen</a>
-        <a href="sell.html" class="nav__link">Buch verkaufen</a>
-        <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
-      </div>
-      <div class="nav__actions">
-        <a href="#" class="btn btn--outline btn--sm">Anmelden</a>
-        <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
-      </div>
-      <button class="nav__toggle" aria-label="Menü öffnen" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<body data-page="browse">
+<main>
+  <div class="page-head">
+    <div class="wrap">
+      <p class="kicker">Marktplatz</p>
+      <h1 class="display" style="margin-top:12px">Alle Buchprojekte</h1>
+      <form class="search" id="searchForm" role="search">
+        <input type="search" id="q" placeholder="Titel, Autor:in oder Stichwort" aria-label="Suche">
+        <button type="submit">Suchen</button>
+      </form>
     </div>
   </div>
-  <div class="nav__mobile">
-    <a href="browse.html" class="nav__link">Durchsuchen</a>
-    <a href="sell.html" class="nav__link">Buch verkaufen</a>
-    <a href="index.html#how-it-works" class="nav__link">So funktioniert's</a>
-    <a href="#" class="btn btn--outline btn--sm" style="margin-top:8px">Anmelden</a>
-    <a href="sell.html" class="btn btn--primary btn--sm">Listing erstellen</a>
+
+  <div class="wrap market">
+    <aside class="filters" id="filters" aria-label="Filter">
+      <div class="filters__head">
+        <h2>Filter</h2>
+        <button class="filters__reset" id="reset" type="button">Zurücksetzen</button>
+      </div>
+      <div class="filter-group">
+        <h3>Genre</h3>
+        <div id="fGenre"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Paket</h3>
+        <div id="fPackage"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Umfang</h3>
+        <div id="fWords"></div>
+      </div>
+      <div class="filter-group">
+        <h3>Preis in €</h3>
+        <div class="price-inputs">
+          <input class="input" type="number" id="pmin" placeholder="von" min="0" step="100" inputmode="numeric" aria-label="Mindestpreis">
+          <input class="input" type="number" id="pmax" placeholder="bis" min="0" step="100" inputmode="numeric" aria-label="Höchstpreis">
+        </div>
+      </div>
+      <button class="btn btn--block filters__close" id="closeFilters" type="button">Ergebnisse anzeigen</button>
+    </aside>
+
+    <section aria-live="polite">
+      <div class="toolbar">
+        <div class="toolbar__count" id="count"></div>
+        <div class="toolbar__right">
+          <button class="btn btn--ghost btn--sm filter-open" id="openFilters" type="button">Filter</button>
+          <select class="select" id="sort" aria-label="Sortierung">
+            <option value="empfohlen">Empfohlen</option>
+            <option value="neu">Neueste zuerst</option>
+            <option value="preis-auf">Preis aufsteigend</option>
+            <option value="preis-ab">Preis absteigend</option>
+          </select>
+          <div class="view-switch" role="group" aria-label="Ansicht">
+            <button type="button" data-view="grid" aria-pressed="true" title="Raster">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+            </button>
+            <button type="button" data-view="list" aria-pressed="false" title="Liste">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="2" width="14" height="2"/><rect x="1" y="7" width="14" height="2"/><rect x="1" y="12" width="14" height="2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div id="results"></div>
+    </section>
   </div>
-</nav>
+</main>
 
-<!-- Browse header -->
-<div class="browse-header">
-  <div class="container">
-    <h1 class="browse-header__title">Buchprojekte durchsuchen</h1>
-    <form class="search-bar" id="searchForm">
-      <div class="search-bar__input-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input type="search" class="search-bar__input" id="searchInput"
-               placeholder="Titel, Autor oder Schlagwort suchen…">
-      </div>
-      <button type="submit" class="btn btn--primary">Suchen</button>
-    </form>
-  </div>
-</div>
-
-<!-- Browse body -->
-<div class="browse-body">
-  <div class="container">
-    <div class="browse-layout">
-
-      <!-- Filter Sidebar -->
-      <aside class="filter-sidebar">
-        <div class="filter-sidebar__title">
-          Filter
-          <span class="filter-sidebar__clear" id="clearFilters">Alle zurücksetzen</span>
-        </div>
-
-        <!-- Mobile close -->
-        <button id="closeSidebar" class="btn btn--ghost btn--sm" style="display:none; margin-bottom: var(--space-4)">
-          ✕ Schließen
-        </button>
-
-        <div class="filter-group">
-          <div class="filter-group__heading">Genre</div>
-          <div class="checkbox-group" id="genreFilter">
-            <!-- rendered by JS -->
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <div class="filter-group__heading">Wortanzahl</div>
-          <div class="checkbox-group" id="wordRangeFilter">
-            <!-- rendered by JS -->
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <div class="filter-group__heading">Pakettyp</div>
-          <div class="checkbox-group" id="packageFilter">
-            <!-- rendered by JS -->
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <div class="filter-group__heading">Preis (€)</div>
-          <div class="price-range-inputs">
-            <input type="number" class="price-range-input" id="priceMin"
-                   placeholder="Min" min="0" step="100">
-            <input type="number" class="price-range-input" id="priceMax"
-                   placeholder="Max" min="0" step="100">
-          </div>
-        </div>
-      </aside>
-
-      <!-- Main content -->
-      <main>
-        <!-- Mobile filter toggle -->
-        <button class="filter-toggle-btn" id="filterToggleBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/>
-            <line x1="12" y1="18" x2="20" y2="18"/>
-          </svg>
-          Filter anzeigen
-        </button>
-
-        <div class="browse-toolbar">
-          <div class="browse-result-count" id="resultCount">–</div>
-          <div class="browse-controls">
-            <select class="sort-select" id="sortSelect">
-              <option value="featured">Featured zuerst</option>
-              <option value="newest">Neueste zuerst</option>
-              <option value="price-asc">Preis: Aufsteigend</option>
-              <option value="price-desc">Preis: Absteigend</option>
-              <option value="words-desc">Meiste Wörter</option>
-            </select>
-            <div class="view-toggle">
-              <button class="view-toggle__btn active" data-view="grid" title="Rasteransicht">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
-                </svg>
-              </button>
-              <button class="view-toggle__btn" data-view="list" title="Listenansicht">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
-                  <line x1="8" y1="18" x2="21" y2="18"/>
-                  <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
-                  <line x1="3" y1="18" x2="3.01" y2="18"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Active filter chips -->
-        <div class="active-filters" id="activeFilters"></div>
-
-        <!-- Listings -->
-        <div class="listings-grid" id="listingsContainer">
-          <!-- rendered by JS -->
-        </div>
-      </main>
-
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__grid">
-      <div>
-        <div class="footer__logo">ReadyTo<span>Publish</span></div>
-        <p class="footer__tagline">Der Marktplatz für druckfertige Buchprojekte.</p>
-      </div>
-      <div>
-        <div class="footer__heading">Marktplatz</div>
-        <div class="footer__links">
-          <a href="browse.html" class="footer__link">Alle Listings</a>
-          <a href="browse.html?category=fantasy" class="footer__link">Fantasy</a>
-          <a href="browse.html?category=thriller" class="footer__link">Thriller</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer__heading">Verkaufen</div>
-        <div class="footer__links">
-          <a href="sell.html" class="footer__link">Listing erstellen</a>
-          <a href="#" class="footer__link">Seller-Guide</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer__heading">Unternehmen</div>
-        <div class="footer__links">
-          <a href="#" class="footer__link">Über uns</a>
-          <a href="#" class="footer__link">Datenschutz</a>
-          <a href="#" class="footer__link">AGB</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <span>© 2026 ReadyToPublish. Alle Rechte vorbehalten.</span>
-    </div>
-  </div>
-</footer>
-
+<script type="module" src="js/main.js"></script>
 <script type="module" src="js/browse.js"></script>
 </body>
 </html>
